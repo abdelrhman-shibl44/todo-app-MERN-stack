@@ -9,17 +9,18 @@ import {
   Query,
 } from '@nestjs/common';
 import { TodoService } from './todo.service';
-import { Category, Todo } from './schemas/todo.schema';
+import { Todo } from './schemas/todo.schema';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
+import { Query as ExpressQuery } from 'express-serve-static-core';
 
 @Controller('todos')
 export class TodoController {
   constructor(private todoService: TodoService) {}
   // Get all todos with filter todos if category is selected
   @Get()
-  async getAllTodos(@Query('category') cate?: Category): Promise<Todo[]> {
-    return this.todoService.findAllTodos(cate);
+  async getAllTodos(@Query() query?: ExpressQuery): Promise<Todo[]> {
+    return this.todoService.findAllTodos(query);
   }
 
   // Add a todo
