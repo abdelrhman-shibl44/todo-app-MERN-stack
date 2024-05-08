@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export enum Category {
-  ALL = 'all',
   WORK = 'work',
   PERSONAL = 'personal',
   SHOPPING = 'shopping',
@@ -23,7 +22,7 @@ export class Todo {
   @Prop({ default: false })
   is_completed: boolean;
 
-  @Prop({ default: 'all' })
+  @Prop()
   category: Category;
 }
 

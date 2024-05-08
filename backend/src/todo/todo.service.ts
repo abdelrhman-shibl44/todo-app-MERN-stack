@@ -1,7 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import { Category, Todo } from './schemas/todo.schema';
+import { isArray } from 'class-validator';
 
 @Injectable()
 export class TodoService {
@@ -12,11 +17,18 @@ export class TodoService {
 
   // Find all todos with filter todos if category is selected
   async findAllTodos(cate?: Category): Promise<Todo[]> {
-    if (cate && cate !== Category.ALL) {
-      return await this.todoModel.find({ category: cate }).exec();
-    } else {
-      return await this.todoModel.find().exec();
+    const query = {};
+    if (cate) {
+      // Check if cate is an array
+      if (isArray(cate)) {
+        query['category'] = { $in: cate };
+      } else {
+        // If cate is a single category, directly match the category
+        query['category'] = cate;
+      }
     }
+
+    return await this.todoModel.find(query).exec();
   }
 
   async createTodo(todo: Todo): Promise<Todo> {
@@ -25,6 +37,10 @@ export class TodoService {
   }
 
   async findTodoById(id: string): Promise<Todo> {
+    const isValidId = mongoose.isValidObjectId(id);
+    if (!isValidId) {
+      throw new BadRequestException('please enter correct id.');
+    }
     const todo = await this.todoModel.findById(id);
     if (!todo) throw new NotFoundException('Todo not found');
     return todo;
