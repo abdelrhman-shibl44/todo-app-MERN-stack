@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar/Navbar";
+import Navbar from "../components/Navbar/Navbar";
+import Theme from "./theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,12 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html suppressHydrationWarning lang="en">
       <body className={inter.className}>
-        <Navbar />
-        <main className="min-h-[calc(100vh-var(--nav-h))] flex flex-col justify-center">
-          {children}
-        </main>
+        <Theme>
+          <Navbar />
+          <main className="min-h-[calc(100vh-var(--nav-h))] flex flex-col justify-center">
+            {children}
+          </main>
+        </Theme>
       </body>
     </html>
   );

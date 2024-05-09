@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import NavItem from "./NavItem";
 import AuthLinks from "./AuthLinks";
+import ThemeToggle from "../ui-controls/ThemeToggle";
 type SidebarProps = {
   Links: {
     key: string;
@@ -53,6 +54,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, Links }: SidebarProps) => {
         </ul>
         <AuthLinks setSidebarOpen={setSidebarOpen} />
       </div>
+      <ThemeToggle />
     </div>
   );
 };

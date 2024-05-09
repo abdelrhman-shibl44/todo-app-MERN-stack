@@ -6,6 +6,7 @@ import Sidebar from "./Sidebar";
 import NavItem from "./NavItem";
 import AuthLinks from "./AuthLinks";
 import MenuBar from "./MenuBar";
+import ThemeToggle from "../ui-controls/ThemeToggle";
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const Links = [
@@ -40,6 +41,9 @@ const Navbar = () => {
         </ul>
         <div className="hidden md:block">
           <AuthLinks setSidebarOpen={setSidebarOpen} />
+        </div>
+        <div className="hidden md:flex">
+          <ThemeToggle />
         </div>
         <MenuBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       </div>
