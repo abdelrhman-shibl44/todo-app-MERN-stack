@@ -1,4 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
+import { User } from '../../auth/schemas/user.schema';
 
 export enum Category {
   WORK = 'work',
@@ -16,14 +18,14 @@ export class Todo {
   @Prop()
   description: string;
 
-  @Prop()
-  author: string;
-
   @Prop({ default: false })
   is_completed: boolean;
 
   @Prop()
   category: Category;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  author: User;
 }
 
 export const TodoSchema = SchemaFactory.createForClass(Todo);
