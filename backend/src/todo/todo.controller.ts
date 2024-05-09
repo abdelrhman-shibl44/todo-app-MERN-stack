@@ -17,6 +17,7 @@ import { UpdateTodoDto } from './dto/update-todo.dto';
 import { Query as ExpressQuery } from 'express-serve-static-core';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from 'src/auth/schemas/user.schema';
+import { TodosRes } from './interfaces/todo.interface';
 
 @Controller('todos')
 export class TodoController {
@@ -28,7 +29,7 @@ export class TodoController {
     @Req() req,
     @Query()
     query?: ExpressQuery,
-  ): Promise<Todo[]> {
+  ): Promise<TodosRes> {
     return this.todoService.findAllTodos(query, req.user as User);
   }
 
