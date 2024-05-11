@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar/Navbar";
 import Theme from "./theme-provider";
+import "react-toastify/dist/ReactToastify.css";
+import { Flip, ToastContainer } from "react-toastify";
+import { ReduxProvider } from "./redux/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +23,13 @@ export default function RootLayout({
     <html suppressHydrationWarning lang="en">
       <body className={inter.className}>
         <Theme>
-          <Navbar />
-          <main className="min-h-[calc(100vh-var(--nav-h))] flex flex-col justify-center">
-            {children}
-          </main>
+          <ReduxProvider>
+            <Navbar />
+            <main className="min-h-[calc(100vh-var(--nav-h))] flex flex-col justify-center">
+              {children}
+              <ToastContainer theme="light" transition={Flip} />
+            </main>
+          </ReduxProvider>
         </Theme>
       </body>
     </html>
