@@ -6,6 +6,7 @@ type ButtonProps = {
   type?: "button" | "submit" | "reset";
   isFormLoading?: boolean;
   disabled?: boolean;
+  onMouseEnter?: (e: MouseEvent<HTMLButtonElement>) => void;
   text?: string;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   onChange?: () => void;
@@ -20,12 +21,14 @@ const Button = ({
   title,
   text,
   disabled,
+  onMouseEnter,
   children,
 }: ButtonProps) => {
   return (
     <button
       title={title && title}
       type={type ? type : "button"}
+      onMouseEnter={onMouseEnter}
       className={
         className
           ? className
