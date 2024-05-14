@@ -1,3 +1,5 @@
+import { TodoItem } from "@/Types.common";
+
 // authentication
 export type AuthRegister = {
   name: string;
@@ -15,6 +17,11 @@ export type User = {
   name: string;
   email: string;
   token: string | null;
+  linkedinData: {
+    name: string;
+    title: string;
+    photoUrl: string;
+  };
 };
 
 export type AuthState = {
@@ -27,4 +34,20 @@ export type AuthState = {
 export type FormData = {
   email: string;
   password: string;
+};
+
+// todos
+export type TodosList = {
+  allTodosLoaded: boolean;
+  todos: TodoItem[];
+};
+
+export type TodoState = {
+  todosList: TodosList;
+  selectedTodo: TodoItem | null;
+  limit: number;
+  loadingPost: boolean;
+  loadingGet: boolean;
+  isLoadingMore: boolean;
+  error: string[] | string | null;
 };
