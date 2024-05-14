@@ -11,10 +11,10 @@ import Button from "../ui-controls/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/redux/store";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 
 const DashboardForm = () => {
   const { user, isAuth } = useSelector((state: RootState) => state.auth);
-
   useLayoutEffect(() => {
     if (!isAuth) {
       redirect("/auth/login");
@@ -22,8 +22,8 @@ const DashboardForm = () => {
   }, [isAuth]);
 
   const [formData, setFormData] = useState({
-    name: user?.name || "",
-    email: user?.email || "",
+    name: user?.linkedinData?.name || user?.name || "",
+    title: user?.linkedinData?.title || user?.email || "",
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +36,10 @@ const DashboardForm = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (user?.name == formData.name && user?.email == formData.email) {
+    if (
+      user?.linkedinData?.name == formData.name &&
+      user?.linkedinData?.title == formData.title
+    ) {
       return toast.error("Please change your info first.");
     }
     try {
@@ -47,9 +50,18 @@ const DashboardForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      {user?.linkedinData.photoUrl && (
+        <div className="flex justify-center rounded-full items-center gap-4">
+          <img
+            className="rounded-full w-28 h-28"
+            src={user.linkedinData.photoUrl}
+            alt="LinkedIn Image"
+          />
+        </div>
+      )}
       <Input
         type="name"
-        name="name"
+        name="title"
         id="name"
         value={formData.name}
         onChange={handleChange}
@@ -57,10 +69,10 @@ const DashboardForm = () => {
         disable={true}
       />
       <Input
-        type="email"
-        name="email"
-        id="email"
-        value={formData.email}
+        type="text"
+        name="text"
+        id="text"
+        value={formData.title}
         onChange={handleChange}
         placeholder="Type Your New Email"
         disable={true}
