@@ -8,10 +8,10 @@ type Option = {
 
 type SelectProps = {
   title: string;
-  value: string;
+  value: string | string[] | undefined;
   options: Option[];
   name: string;
-  defaultVal: string;
+  defaultVal?: string | string[] | undefined;
   onChange: React.ChangeEventHandler<HTMLSelectElement>;
   className?: string;
 };
