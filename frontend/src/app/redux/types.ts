@@ -1,13 +1,13 @@
 import { TodoItem } from "@/Types.common";
 
 // authentication
-export type AuthRegister = {
+export type TAuthRegister = {
   name: string;
   email: string;
   password: string;
 };
 
-export type AuthLogin = {
+export type TAuthLogin = {
   email: string;
   password: string;
 };

@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { loginIn, signUp } from "../api";
-import { AuthLogin, AuthRegister } from "../types";
+import { TAuthLogin, TAuthRegister } from "../types";
 
 const AuthRegister = createAsyncThunk(
   "auth/signup",
-  async (formData: AuthRegister, { rejectWithValue }) => {
+  async (formData: TAuthRegister, { rejectWithValue }) => {
     try {
       const { data } = await signUp(formData);
       return data.token;
@@ -16,7 +16,7 @@ const AuthRegister = createAsyncThunk(
 
 const AuthLogin = createAsyncThunk(
   "auth/login",
-  async (formData: AuthLogin, { rejectWithValue }) => {
+  async (formData: TAuthLogin, { rejectWithValue }) => {
     try {
       const { data } = await loginIn(formData);
       return data;
