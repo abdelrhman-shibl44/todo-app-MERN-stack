@@ -18,6 +18,10 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwind-scrollbar")({
+      nocompatible: false,
+    }),
+  ],
 };
 export default config;
