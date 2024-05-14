@@ -24,6 +24,7 @@ const RegisterForm = () => {
       redirect("/dashboard");
     }
   }, [isAuth]);
+
   const router = useRouter();
   const [formError, setFormError] = useState("");
   const [formData, setFormData] = useState({
@@ -59,13 +60,14 @@ const RegisterForm = () => {
         toast.error(Array.isArray(err.message) ? err.message[0] : err.message);
       });
   };
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
       <Input
         type="name"
         name="name"
         id="name"
-        placeholder="Enter your Name"
+        placeholder="Enter your Name (as on LinkedIn)"
         onChange={handleChange}
         value={formData.name}
       />
