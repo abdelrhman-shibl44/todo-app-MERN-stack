@@ -21,25 +21,18 @@ export class TodoService {
   // Find all todos with filter todos if category is selected
   async findAllTodos(query: Query, user: User): Promise<TodosRes> {
     //limit initial todos
-    const resPerPage = 4;
-    const currentPage = Number(query.page) || 1;
-    const skip = resPerPage * (currentPage - 1);
+    let limit = Number(query.limit || 4);
     // filter categories
     const keyword: any = { author: user._id };
+    // Check if category query parameter exists and is a string
     if (query.category) {
-      // Check if cate is an array
-      if (isArray(query.category)) {
-        keyword['category'] = { $in: query.category };
-      } else {
-        // If cate is a single category, directly match the category
-        keyword['category'] = query.category;
+      if (query && typeof query.category === 'string') {
+        keyword.category = { $in: (query.category as string).split(',') };
+        limit = Infinity;
       }
     }
-    const todos = await this.todoModel
-      .find(keyword)
-      .limit(resPerPage)
-      .skip(skip);
-    const allTodosLoaded = todos.length < resPerPage;
+    const todos = await this.todoModel.find(keyword).limit(limit);
+    const allTodosLoaded = todos.length < limit;
     return { todos, allTodosLoaded };
   }
   //create todo
