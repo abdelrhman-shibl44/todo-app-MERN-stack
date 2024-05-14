@@ -9,6 +9,11 @@ const initialState = {
     name: "",
     email: "",
     token: "",
+    linkedinData: {
+      name: "",
+      title: "",
+      photoUrl: "",
+    },
   },
   loading: false,
   isAuth: false,
@@ -20,6 +25,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logOut: () => {
+      localStorage.removeItem("token");
       return initialState;
     },
   },
