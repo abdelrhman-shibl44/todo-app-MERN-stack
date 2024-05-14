@@ -11,7 +11,7 @@ const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const Links = [
     { key: "home", href: "/", name: "home" },
-    { key: "dashboard", href: "/dashboard", name: "dashboard" },
+    { key: "profile", href: "/profile", name: "profile" },
   ];
 
   return (

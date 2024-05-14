@@ -1,15 +1,15 @@
 import Card from "../../components/Auth/Card";
-import DashboardForm from "../../components/Auth/DashboardForm";
+import ProfileForm from "../../components/Auth/ProfileForm";
 import React from "react";
 
-function Dashboard() {
+function Profile() {
   return (
     <div className="flex justify-center items-center h-full">
       <Card title="Personal Info">
-        <DashboardForm />
+        <ProfileForm />
       </Card>
     </div>
   );
 }
 
-export default Dashboard;
+export default Profile;

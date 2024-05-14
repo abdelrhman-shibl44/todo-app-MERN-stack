@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/redux/store";
 import { redirect } from "next/navigation";
 
-const DashboardForm = () => {
+const ProfileForm = () => {
   const { user, isAuth } = useSelector((state: RootState) => state.auth);
   useLayoutEffect(() => {
     if (!isAuth) {
@@ -87,4 +87,4 @@ const DashboardForm = () => {
   );
 };
 
-export default DashboardForm;
+export default ProfileForm;

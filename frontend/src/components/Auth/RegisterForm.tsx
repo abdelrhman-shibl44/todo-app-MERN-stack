@@ -21,7 +21,7 @@ const RegisterForm = () => {
 
   useLayoutEffect(() => {
     if (isAuth) {
-      redirect("/dashboard");
+      redirect("/profile");
     }
   }, [isAuth]);
 

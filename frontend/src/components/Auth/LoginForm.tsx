@@ -24,7 +24,7 @@ const LoginForm = () => {
 
   useLayoutEffect(() => {
     if (isAuth) {
-      redirect("/dashboard");
+      redirect("/profile");
     }
   }, [isAuth]);
 
