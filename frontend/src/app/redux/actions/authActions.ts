@@ -1,16 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { loginIn, signUp } from "../api";
-
-type AuthRegister = {
-  name: string;
-  email: string;
-  password: string;
-};
-
-type AuthLogin = {
-  email: string;
-  password: string;
-};
+import { AuthLogin, AuthRegister } from "../types";
 
 const AuthRegister = createAsyncThunk(
   "auth/signup",
@@ -35,4 +25,5 @@ const AuthLogin = createAsyncThunk(
     }
   }
 );
+
 export { AuthRegister, AuthLogin };
