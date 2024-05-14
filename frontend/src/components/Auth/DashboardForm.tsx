@@ -11,7 +11,6 @@ import Button from "../ui-controls/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/redux/store";
 import { redirect } from "next/navigation";
-import Image from "next/image";
 
 const DashboardForm = () => {
   const { user, isAuth } = useSelector((state: RootState) => state.auth);

@@ -5,6 +5,7 @@ import { TodoModule } from './todo/todo.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
+import { LinkedinModule } from './linkedin/linkedin.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AuthModule } from './auth/auth.module';
     TodoModule,
     MongooseModule.forRoot(process.env.DB_URI),
     AuthModule,
+    LinkedinModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -11,6 +11,7 @@ import { JwtService } from '@nestjs/jwt';
 import { SignUpDto } from './dto/signup.dto';
 import { LoginDto } from './dto/login.dto';
 import { TUser } from './user.entity';
+import { LinkedinService } from '../linkedin/linkedin.service';
 
 @Injectable()
 export class AuthService {
@@ -18,6 +19,7 @@ export class AuthService {
     @InjectModel(User.name)
     private userModel: Model<User>,
     private jwtService: JwtService,
+    private linkedinService: LinkedinService,
   ) {}
 
   async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
@@ -49,6 +51,17 @@ export class AuthService {
     }
     const { _id, name, email } = user.toObject(); // Exclude password field
     const token = this.jwtService.sign({ id: user._id });
-    return { user: { _id, name, email, token } };
+    // Fetch LinkedIn profile data after successful login
+    let linkedinData;
+    try {
+      // Fetch LinkedIn profile data after successful login
+      linkedinData = await this.linkedinService.getUserProfile(name);
+    } catch (error) {
+      console.error('Failed to fetch LinkedIn data:', error);
+      // Handle the error gracefully
+      linkedinData = null;
+    }
+    // Merge LinkedIn data with user data
+    return { user: { _id, name, email, token, linkedinData } };
   }
 }
