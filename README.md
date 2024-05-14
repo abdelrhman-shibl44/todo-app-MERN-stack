@@ -15,7 +15,7 @@ This is a MERN (MongoDB, Express.js, React.js, Node.js) stack application where 
    JWT_SECRET=4fccfb075de0815f1a032bd77c0a160c59c471284ece54e09d438712dc7f1a9f
    JWT_EXPIRES=3d
 
-6. Start the backend server by running `npm run dev:start`.
+6. Start the backend server by running `npm run start:dev`.
 
 ### Frontend
 
