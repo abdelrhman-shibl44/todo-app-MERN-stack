@@ -11,3 +11,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.scrollBar {
+  @apply scrollbar-thin scrollbar-thumb-gray-500 dark:scrollbar-track-black;
+}
